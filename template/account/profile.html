@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Profile</title>
+{% endblock title %}
+{% block content %}
+<section>
+  <div class="container py-5">
+
+
+    <div class="row">
+      <div class="col-lg-4">
+
+      </div>
+      <div class="col-lg-8">
+        <form method="post">
+          {% csrf_token %}
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+
+                  <div class="row">
+                      <div class="col-md-7">
+                    <div>
+                  <label for="id_first_name">First name:</label>
+
+
+
+                  {{form.first_name}}
+
+                </div>
+                <div>
+                  <label for="id_last_name">Last name:</label>
+
+
+
+                  {{form.last_name}}
+
+                </div>
+                <div>
+                  <label for="id_last_name">Username:</label>
+
+
+
+                  {{form.username}}
+
+                </div>
+                <div>
+                  <label for="id_email">Email address:</label>
+
+
+
+                  {{form.email}}
+
+                </div>
+                          <div class="pt-2">
+                  <button type="submit" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+              >
+              Save
+            </button>
+                </div>
+               </div>
+
+                <div class="col-md-5">
+                    <div>
+                  <label for="id_old_password">Old Password:</label>
+
+
+
+
+                    {{form.old_password}}
+
+                </div>
+
+                <div>
+                  <label for="id_new_password1">New Password:</label>
+
+
+
+
+                    {{form.new_password1}}
+                </div>
+
+                <div>
+                  <label for="id_new_password2">Confirm New Password:</label>
+
+                    {{form.new_password2}}
+
+                </div>
+                    <div class="pt-2">
+                      <button type="submit" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+              >
+              Change Password
+            </button>
+                </div>
+                </div>
+                  </div>
+
+
+
+                {% if form.errors %}
+                <div class="alert alert-error">
+                  <ul>
+                  {% for field, errors in form.errors.items %}
+                  <li class="list-disc list-inside">{{field}} {{ errors.0 }}</li>
+                  {% endfor %}
+                  </ul>
+                </div>
+                {% endif %}
+              </>
+            </div>
+          </div>
+
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

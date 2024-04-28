@@ -1,0 +1,108 @@
+
+{% extends 'base.html' %}
+{% block title%}
+<title>Event Details</title>
+{%endblock%}
+{% autoescape on %}
+{% block content%}
+
+
+
+<!-- Cards with title -->
+<h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+    Event Details
+</h4>
+
+<div class="gap-6 mb-8">
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="grid grid-cols-4 gap-6">
+            <div class="col-span-1">
+                <img class="rounded-lg" src="{{event.image.url}}">
+            </div>
+            <div class="col-span-3">
+                <div class="flex justify-between">
+                    <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
+                        {{event.event_name}} | <span
+                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                            {{event.get_ticket_type_display }}
+                        </span>
+                    </h4>
+                    <div>
+                        <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">{{event.price}}£</h4>
+                    </div>
+                </div>
+                <h4 class="font-semibold text-gray-600 dark:text-gray-300">
+                    Available Tickets :{{event.available_tickets}}
+                </h4>
+                <div class="flex flex-col">
+                    <p class="pb-3 tracking-wide">{{event.description | safe}}</p>
+                    <div class="ml-auto">
+                        <a href="/buy-ticket/{{event.id}}/">
+                            <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/buy--v2.png"
+                                alt="buy--v2" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr class="my-6">
+<h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+    Resale This Event Ticket</h1>
+
+
+    <div class="grid gap-2 mb-8 md:grid-cols-3">
+        {%for ticket in tickets%}
+
+        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="flex justify-between">
+                <div class="flex gap-4 items-center">
+                    <div>
+                        <img width="35" height="35" src="https://img.icons8.com/ios-glyphs/30/test-account.png"
+                            alt="test-account" />
+                    </div>
+                    <h4 class="mb-3 font-semibold text-gray-600 dark:text-gray-300">
+                        {{ticket.ticket_holder.get_full_name}}
+                    </h4>
+                </div>
+                <div>
+                    <div>
+                        <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
+                            {{ticket.event_name.price}}£
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <div class="pt-5">
+                    {%if request.user == ticket.ticket_holder%}
+                    <a href="#"
+                        class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Already Buy
+                    </a>
+                    {%else%}
+                    <a href="/resale-ticket/{{ticket.id}}/">
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/buy--v2.png"
+                            alt="buy--v2" />
+
+                    </a>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        {% endfor %}
+    </div>
+
+
+
+
+
+    {%endblock%}
+    {% endautoescape %}

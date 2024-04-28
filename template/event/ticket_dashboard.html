@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title%}
+<title>Dashboard</title>
+{%endblock%}
+{% block content%}
+
+<div class="my-6 mb-4">
+  <h1 class="mb-4 text-2xl font-semibold text-gray-600 dark:text-gray-300">Dashboard</h1>
+</div>
+
+<div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+    <!-- Card -->
+    <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+      <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
+          </path>
+        </svg>
+      </div>
+      <div>
+        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+          Total Tickets
+        </p>
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          {{tickets.count}}
+        </p>
+      </div>
+    </div>
+    <!-- Card -->
+    <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+      <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <div>
+        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+          Account balance
+        </p>
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          £ {{request.user.amount}}
+        </p>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+  <h1 class="mb-4 text-2xl font-semibold text-gray-600 dark:text-gray-300">Your Event's Tickets</h1>
+
+<div class="grid gap-6 grid-cols-4">
+  <section class="col-span-3">
+    <div class="grid gap-2 mb-8 md:grid-cols-3">
+      {% for ticket in tickets%}
+      <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="flex justify-between">
+          <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
+            {{ticket.event_name}}
+          </h4>
+          <div>
+            <span
+              class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+              {{ticket.event_name.get_ticket_type_display }}
+            </span>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <p class="">Reference Number : {{ticket.reference_number}}</p>
+          <img class="rounded-lg w-52 h-32" src="{{ticket.event_name.image.url}}">
+        </div>
+        <hr class="my-8" />
+        <div class="flex justify-between items-center">
+          <div>
+            <a href="/event/{{ticket.event_name.id }}/" class="mb-4 text-base font-semibold text-gray-600 dark:text-gray-300"><img
+                width="35" height="35" src="https://img.icons8.com/ios-glyphs/30/visible--v1.png"
+                alt="visible--v1" /></a>
+          </div>
+          <div>
+            {% if ticket.allow_resale %}
+            <a href="/cancel-resale/{{ticket.id }}/"
+              class="px-2 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
+              Cancel Resale
+            </a>
+            {%else%}
+            <a href="/allow-resale/{{ticket.id }}/"
+              class="px-2 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              Allow To Resale
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </section>
+
+  <section>
+    <h1 class="-mt-12 mb-8 text-xl font-semibold text-gray-600 dark:text-gray-300">History</h1>
+    <table class="">
+      <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+        {% for history in history%}
+        <tr class="text-gray-700 dark:text-gray-400">
+          <td class="px-4 py-3">
+            <div class="flex items-center text-sm">
+              <!-- Avatar with inset shadow -->
+              <div>
+                <p class="font-semibold">{{history.body}}</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400">
+                  {{history.created}}
+                </p>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+        {%endfor%}
+
+      </tbody>
+    </table>
+  </section>
+</div>
+{%endblock%}

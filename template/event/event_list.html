@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title%}
+<title>Event List</title>
+{%endblock%}
+{% block content%}
+
+
+
+<!-- Cards with title -->
+<h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+    Event
+</h4>
+<div class="mb-4">
+    <form method="get">
+        <div class="flex justify-center flex-1 lg:mr-32">
+            <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+                <div class="absolute inset-y-0 flex items-center pl-2">
+                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="flex">
+                    <input
+                        class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                      name="event"  type="text" placeholder="Search for Event" aria-label="Search" />
+                    <button type="submit">
+                        <div class="absolute inset-y-0 flex items-center pl-2">
+                            <svg class="w-8 h-8" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+    </form>
+</div>
+<div class="grid gap-6 mb-8 md:grid-cols-4">
+    {% for event in event_list%}
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="flex justify-between">
+            <div class="">
+                <h4 class="mb-3 font-semibold text-gray-600 dark:text-gray-300">
+                    {{event.event_name}}
+                </h4>
+                <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                    {{event.get_ticket_type_display }}
+                </span>
+                <h4 class="my-3 font-semibold text-gray-600 dark:text-gray-300">
+                    Available Tickets :{{event.available_tickets}}
+                </h4>
+            </div>
+            <div>
+                <div>
+                    <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
+                        {{event.price}}£
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p class="pb-3">{{event.description|truncatechars:25 | safe }}</p>
+            <img class="rounded-lg w-52 h-32" src="{{event.image.url}}">
+        </div>
+        <hr class="my-8" />
+        <div class="flex justify-between">
+            <div>
+                <a href="/event/{{event.id }}/"
+                    class="mb-4 text-base font-semibold text-gray-600 dark:text-gray-300"><img width="35" height="35"
+                        src="https://img.icons8.com/ios-glyphs/30/visible--v1.png" alt="visible--v1" /></a>
+            </div>
+            <div>
+                <a href="/buy-ticket/{{event.id}}/">
+                    <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/buy--v2.png" alt="buy--v2" />
+                </a>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+
+
+{%endblock%}

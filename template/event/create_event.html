@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title%}
+<title>Event Details</title>
+  {%endblock%}
+{% block content%}
+
+
+
+        <!-- Cards with title -->
+        <h4 class="my-3 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+            Create Event
+        </h4>
+
+
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {{form}}
+     <div class="pb-5 flex justify-center">
+         <button type="submit" class="block w-[30%] px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+              >
+              Save Event
+            </button>
+     </div>
+    <p>{{form.errors}}</p>
+</form>
+
+
+{%endblock%}
