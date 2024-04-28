@@ -1,20 +1,23 @@
-{% extends 'base.html' %}
-{% block title%}
+{% extends 'base.html' %} <!-- Extends the base HTML layout -->
+
+{% block title%} <!-- Defines the title block -->
 <title>Event List</title>
 {%endblock%}
-{% block content%}
 
+{% block content%} <!-- Defines the content block -->
 
-
-<!-- Cards with title -->
+<!-- Heading for the Event section -->
 <h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
     Event
 </h4>
+
+<!-- Search form -->
 <div class="mb-4">
     <form method="get">
         <div class="flex justify-center flex-1 lg:mr-32">
             <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
                 <div class="absolute inset-y-0 flex items-center pl-2">
+                    <!-- Search icon -->
                     <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                             d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -22,11 +25,14 @@
                     </svg>
                 </div>
                 <div class="flex">
+                    <!-- Search input field -->
                     <input
                         class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                       name="event"  type="text" placeholder="Search for Event" aria-label="Search" />
+                    <!-- Search button -->
                     <button type="submit">
                         <div class="absolute inset-y-0 flex items-center pl-2">
+                            <!-- Search icon -->
                             <svg class="w-8 h-8" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -35,17 +41,17 @@
                         </div>
                     </button>
                 </div>
-
             </div>
         </div>
-
-
     </form>
 </div>
+
+<!-- Grid layout for displaying events -->
 <div class="grid gap-6 mb-8 md:grid-cols-4">
-    {% for event in event_list%}
+    {% for event in event_list%} <!-- Loop through each event in the event list -->
     <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="flex justify-between">
+            <!-- Display event details -->
             <div class="">
                 <h4 class="mb-3 font-semibold text-gray-600 dark:text-gray-300">
                     {{event.event_name}}
@@ -58,6 +64,7 @@
                     Available Tickets :{{event.available_tickets}}
                 </h4>
             </div>
+            <!-- Display event price -->
             <div>
                 <div>
                     <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
@@ -67,11 +74,13 @@
             </div>
         </div>
         <div>
+            <!-- Display event description and image -->
             <p class="pb-3">{{event.description|truncatechars:25 | safe }}</p>
             <img class="rounded-lg w-52 h-32" src="{{event.image.url}}">
         </div>
         <hr class="my-8" />
         <div class="flex justify-between">
+            <!-- Links for viewing event details and buying tickets -->
             <div>
                 <a href="/event/{{event.id }}/"
                     class="mb-4 text-base font-semibold text-gray-600 dark:text-gray-300"><img width="35" height="35"
@@ -84,9 +93,7 @@
             </div>
         </div>
     </div>
-    {%endfor%}
+    {%endfor%} <!-- End of event loop -->
 </div>
 
-
-
-{%endblock%}
+{%endblock%} <!-- End of content block -->

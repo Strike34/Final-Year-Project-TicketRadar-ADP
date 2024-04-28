@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
 # Create your models here.
-
+# Define a custom User model named Account that inherits from AbstractUser
 class Account(AbstractUser):
+# Add a boolean field to indicate if the user is an event organizer
     is_event_organizer = models.BooleanField(default=False)
     amount = models.IntegerField(default=0)
 

@@ -1,75 +1,74 @@
-{%load static%}
+{%load static%} <!-- Load Django's static files -->
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{% static './assets/css/tailwind.output.css' %}" />
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <script src="{% static './assets/js/init-alpine.js' %}"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
-  <script src="{% static './assets/js/charts-lines.js' %}" defer></script>
-  <script src="{% static './assets/js/charts-pie.js' %}" defer></script>
+  <meta charset="UTF-8" /> <!-- Set the character encoding for the document -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Set the viewport of the document -->
+  <title>Login</title> <!-- Set the title of the document -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /> <!-- Import Google Fonts -->
+  <link rel="stylesheet" href="{% static './assets/css/tailwind.output.css' %}" /> <!-- Import Tailwind CSS -->
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> <!-- Import Alpine.js -->
+  <script src="{% static './assets/js/init-alpine.js' %}"></script> <!-- Import custom Alpine.js initialization script -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" /> <!-- Import Chart.js CSS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script> <!-- Import Chart.js -->
+  <script src="{% static './assets/js/charts-lines.js' %}" defer></script> <!-- Import custom line chart script -->
+  <script src="{% static './assets/js/charts-pie.js' %}" defer></script> <!-- Import custom pie chart script -->
 </head>
 
 <body>
-  <form method="post">
-    {%csrf_token%}
+  <form method="post"> <!-- Start of the form -->
+    {%csrf_token%} <!-- Django's CSRF token for security -->
   
-  <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-    <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
-      <div class="flex flex-col overflow-y-auto md:flex-row">
-        <div class="h-32 md:h-auto md:w-1/2">
+  <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900"> <!-- Start of the main container -->
+    <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"> <!-- Start of the login card -->
+      <div class="flex flex-col overflow-y-auto md:flex-row"> <!-- Start of the card content -->
+        <div class="h-32 md:h-auto md:w-1/2"> <!-- Start of the image container -->
           <img aria-hidden="true" class="object-cover w-full h-full dark:hidden" src="https://img.freepik.com/free-vector/blogging-concept-illustration_114360-1038.jpg?t=st=1707940158~exp=1707940758~hmac=1bc5e780509572272db174cd170edb3f7d3c870bb8e2c734fb6314cc2018c2a8"
-            alt="Office" />
+            alt="Office" /> <!-- Image for light theme -->
           <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block"
-            src="../assets/img/login-office-dark.jpeg" alt="Office" />
+            src="../assets/img/login-office-dark.jpeg" alt="Office" /> <!-- Image for dark theme -->
         </div>
-        <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+        <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2"> <!-- Start of the form container -->
           <div class="w-full">
             <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
               Login
             </h1>
             <label class="block text-sm">
               <span class="text-gray-700 dark:text-gray-400">Username</span>
-              {{form.username}}
+              {{form.username}} <!-- Django form field for username -->
             </label>
             <label class="block mt-4 text-sm">
               <span class="text-gray-700 dark:text-gray-400">Password</span>
-              {{form.password}}
+              {{form.password}} <!-- Django form field for password -->
             </label>
 
-            <!-- You should use a button here, as the anchor is only used for the example  -->
             <button type="submit" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               >
               Log in
-            </button>
+            </button> <!-- Submit button -->
 
-            <hr class="my-8" />
+            <hr class="my-8" /> <!-- Horizontal line -->
 
 
             <p class="mt-4">
               <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                 href="/password-reset/">
                 Forgot your password?
-              </a>
+              </a> <!-- Link to password reset -->
             </p>
             <p class="mt-1">
               <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                 href="/register/">
                 Create account
-              </a>
+              </a> <!-- Link to registration -->
             </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</form>
+</form> <!-- End of the form -->
 </body>
 
 </html>

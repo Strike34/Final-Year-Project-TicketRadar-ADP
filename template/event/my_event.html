@@ -4,7 +4,7 @@
 {%endblock%}
 {% block content%}
 
-<!-- Cards with title -->
+<!-- Section for Event Organizer Dashboard with heading and Create Event button -->
 <div class="my-6 mb-4">
   <h1 class="mb-4 text-2xl font-semibold text-gray-600 dark:text-gray-300">Event Organizer Dashboard</h1>
   <div class="pb-4">
@@ -13,8 +13,8 @@
     Create Event
   </a>
   </div>
+    <!-- Dynamic display of dashboard cards showing different statistics -->
   <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-    <!-- Card -->
     <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
       <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -32,7 +32,7 @@
         </p>
       </div>
     </div>
-    <!-- Card -->
+    <!-- Additional cards for other statistics like Account Balance and Tickets Sold  -->
     <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
       <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -50,7 +50,6 @@
         </p>
       </div>
     </div>
-    <!-- Card -->
     <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
       <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -68,17 +67,21 @@
         </p>
       </div>
     </div>
-    <!-- Card -->
 
   </div>
   <h1 class="my-4 text-xl font-semibold text-gray-600 dark:text-gray-300">My Events</h1>
 
 </div>
+<!-- Start of the grid for the organizer's events -->
 
 <div class="grid gap-6 grid-cols-4">
   <section class="col-span-3">
     <div class="grid gap-2 mb-8 md:grid-cols-3">
+       <!-- Loop through the events -->
+
       {% for event in event_list%}
+      <!-- Card for each event -->
+
       <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="flex justify-between">
           <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
@@ -92,12 +95,16 @@
           </div>
         </div>
         <div>
+         <!-- Available tickets, event description, and event image -->
+
           <h4 class="font-semibold text-gray-600 dark:text-gray-300">
             Available Tickets :{{event.available_tickets}}
         </h4>
           <p class="pb-3">{{event.description|truncatechars:25 | safe}}</p>
           <img class="rounded-lg w-52 h-32" src="{{event.image.url}}">
         </div>
+        <!-- Event actions: view, update, and delete -->
+
         <hr class="my-8" />
         <div class="flex justify-between items-center">
           <div>
@@ -123,6 +130,7 @@
       {%endfor%}
     </div>
   </section>
+  <!-- Section for the organizer's history -->
 
   <section>
     <h1 class="-mt-12 mb-8 text-xl font-semibold text-gray-600 dark:text-gray-300">History</h1>
@@ -132,7 +140,7 @@
         <tr class="text-gray-700 dark:text-gray-400">
           <td class="px-4 py-3">
             <div class="flex items-center text-sm">
-              <!-- Avatar with inset shadow -->
+            <!-- History details -->
               <div>
                 <p class="font-semibold">{{history.body}}</p>
                 <p class="text-xs text-gray-600 dark:text-gray-400">

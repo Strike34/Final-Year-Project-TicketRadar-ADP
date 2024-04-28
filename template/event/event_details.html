@@ -8,34 +8,47 @@
 
 
 
-<!-- Cards with title -->
+<!-- This is the title of the section -->
 <h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
     Event Details
 </h4>
 
+<!-- This is the container for the event details -->
 <div class="gap-6 mb-8">
+    <!-- This is the card for the event -->
     <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <!-- This is the grid for the event image and details -->
         <div class="grid grid-cols-4 gap-6">
+            <!-- This is the container for the event image -->
             <div class="col-span-1">
+                <!-- This is the event image -->
                 <img class="rounded-lg" src="{{event.image.url}}">
             </div>
+            <!-- This is the container for the event details -->
             <div class="col-span-3">
+                <!-- This is the header for the event name and ticket type -->
                 <div class="flex justify-between">
+                    <!-- This is the event name and ticket type -->
                     <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
                         {{event.event_name}} | <span
                             class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                             {{event.get_ticket_type_display }}
                         </span>
                     </h4>
+                    <!-- This is the event price -->
                     <div>
                         <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">{{event.price}}£</h4>
                     </div>
                 </div>
+                <!-- This is the number of available tickets -->
                 <h4 class="font-semibold text-gray-600 dark:text-gray-300">
                     Available Tickets :{{event.available_tickets}}
                 </h4>
+                <!-- This is the container for the event description and buy button -->
                 <div class="flex flex-col">
+                    <!-- This is the event description -->
                     <p class="pb-3 tracking-wide">{{event.description | safe}}</p>
+                    <!-- This is the buy button -->
                     <div class="ml-auto">
                         <a href="/buy-ticket/{{event.id}}/">
                             <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/buy--v2.png"
@@ -45,64 +58,72 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
+<!-- This is a horizontal line for separation -->
 <hr class="my-6">
+
+<!-- This is the title for the resale section -->
 <h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    Resale This Event Ticket</h1>
+    Resale This Event Ticket
+</h4>
 
+<!-- This is the container for the resale tickets -->
+<div class="grid gap-2 mb-8 md:grid-cols-3">
+    <!-- This is a loop for each resale ticket -->
+    {%for ticket in tickets%}
 
-    <div class="grid gap-2 mb-8 md:grid-cols-3">
-        {%for ticket in tickets%}
-
-        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="flex justify-between">
-                <div class="flex gap-4 items-center">
-                    <div>
-                        <img width="35" height="35" src="https://img.icons8.com/ios-glyphs/30/test-account.png"
-                            alt="test-account" />
-                    </div>
-                    <h4 class="mb-3 font-semibold text-gray-600 dark:text-gray-300">
-                        {{ticket.ticket_holder.get_full_name}}
-                    </h4>
-                </div>
+    <!-- This is the card for the resale ticket -->
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <!-- This is the header for the ticket holder and price -->
+        <div class="flex justify-between">
+            <!-- This is the container for the ticket holder's image and name -->
+            <div class="flex gap-4 items-center">
+                <!-- This is the ticket holder's image -->
                 <div>
-                    <div>
-                        <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
-                            {{ticket.event_name.price}}£
-                        </h4>
-                    </div>
+                    <img width="35" height="35" src="https://img.icons8.com/ios-glyphs/30/test-account.png"
+                        alt="test-account" />
                 </div>
+                <!-- This is the ticket holder's name -->
+                <h4 class="mb-3 font-semibold text-gray-600 dark:text-gray-300">
+                    {{ticket.ticket_holder.get_full_name}}
+                </h4>
             </div>
-            <div class="flex justify-end">
-                <div class="pt-5">
-                    {%if request.user == ticket.ticket_holder%}
-                    <a href="#"
-                        class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                        Already Buy
-                    </a>
-                    {%else%}
-                    <a href="/resale-ticket/{{ticket.id}}/">
-                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/buy--v2.png"
-                            alt="buy--v2" />
-
-                    </a>
-                    {%endif%}
+            <!-- This is the ticket price -->
+            <div>
+                <div>
+                    <h4 class="mb-6 font-semibold text-gray-600 dark:text-gray-300">
+                        {{ticket.event_name.price}}£
+                    </h4>
                 </div>
             </div>
         </div>
-
-
-
-
-
-        {% endfor %}
+        <!-- This is the container for the buy button -->
+        <div class="flex justify-end">
+            <div class="pt-5">
+                <!-- This is a condition to check if the current user is the ticket holder -->
+                {%if request.user == ticket.ticket_holder%}
+                <!-- If the current user is the ticket holder, show the "Already Bought" button -->
+                <a href="#"
+                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Already Bought
+                </a>
+                <!-- If the current user is not the ticket holder, show the buy button -->
+                {%else%}
+                <a href="/resale-ticket/{{ticket.id}}/">
+                    <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/buy--v2.png"
+                        alt="buy--v2" />
+                </a>
+                {%endif%}
+            </div>
+        </div>
     </div>
+    <!-- End of the loop for each resale ticket -->
+    {% endfor %}
+</div>
 
-
-
-
-
-    {%endblock%}
-    {% endautoescape %}
+<!-- End of the block -->
+{%endblock%}
+<!-- End of autoescape -->
+{% endautoescape %}

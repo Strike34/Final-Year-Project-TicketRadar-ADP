@@ -1,28 +1,36 @@
+<!-- Extend the base HTML structure -->
 {% extends 'base.html' %}
+
+<!-- Define the title block -->
 {% block title%}
+<!-- Set the title of the page -->
 <title>Event Details</title>
-  {%endblock%}
+{%endblock%}
+
+<!-- Define the content block -->
 {% block content%}
 
+<!-- Title for the event creation section -->
+<h4 class="my-3 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+  Create Event
+</h4>
 
-
-        <!-- Cards with title -->
-        <h4 class="my-3 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-            Create Event
-        </h4>
-
-
+<!-- Form for event creation -->
 <form method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
-    {{form}}
-     <div class="pb-5 flex justify-center">
-         <button type="submit" class="block w-[30%] px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              >
-              Save Event
-            </button>
-     </div>
-    <p>{{form.errors}}</p>
+  <!-- Add CSRF token for security -->
+  {% csrf_token %}
+  <!-- Render the form fields -->
+  {{form}}
+  <!-- Container for the submit button -->
+  <div class="pb-5 flex justify-center">
+    <!-- Submit button for the form -->
+    <button type="submit" class="block w-[30%] px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+      Save Event
+    </button>
+  </div>
+  <!-- Display form errors -->
+  <p>{{form.errors}}</p>
 </form>
 
-
+<!-- End of the content block -->
 {%endblock%}
